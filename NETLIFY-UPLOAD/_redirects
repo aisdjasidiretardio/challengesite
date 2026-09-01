@@ -1,0 +1,3 @@
+/ /challenge/ 302
+/challenge /challenge/ 301
+/challenge/* /challenge/index.html 200
