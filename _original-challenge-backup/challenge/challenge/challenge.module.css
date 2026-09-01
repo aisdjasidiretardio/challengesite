@@ -1,0 +1,654 @@
+.page {
+  --ink: #25170e;
+  --blue: #123f78;
+  --red: #9e332a;
+  --gold: #d2a13c;
+  --paper: #eadcad;
+  --cream: #f8ebbd;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 16px;
+  overflow-y: auto;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.34), transparent 30%),
+    repeating-linear-gradient(
+      96deg,
+      rgba(80, 52, 22, 0.026) 0 1px,
+      transparent 1px 5px
+    );
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.page,
+.page * {
+  box-sizing: border-box;
+}
+
+.page button,
+.page a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.frame {
+  position: relative;
+  width: min(720px, 100%);
+  min-height: calc(100vh - 32px);
+  min-height: calc(100dvh - 32px);
+  margin: 0 auto;
+  padding: clamp(28px, 6vw, 58px);
+  border: 1px solid rgba(37, 23, 14, 0.48);
+  box-shadow:
+    inset 0 0 0 8px rgba(210, 161, 60, 0.1),
+    8px 10px 0 rgba(37, 23, 14, 0.1);
+  overflow: hidden;
+}
+
+.frame::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(158, 51, 42, 0.22);
+  pointer-events: none;
+}
+
+.screen {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.kicker {
+  margin: 0 0 10px;
+  color: var(--red);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.23em;
+  text-transform: uppercase;
+}
+
+.heading {
+  max-width: 620px;
+  margin: 0;
+  color: var(--blue);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: clamp(2rem, 9vw, 4.1rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.introCopy,
+.instruction,
+.successCopy {
+  max-width: 520px;
+  margin: 20px auto;
+  font-size: clamp(1.08rem, 3.5vw, 1.35rem);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.art {
+  position: relative;
+  display: grid;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  place-items: center;
+  background: linear-gradient(
+    135deg,
+    rgba(18, 63, 120, 0.12),
+    rgba(210, 161, 60, 0.22)
+  );
+  border: 1px solid rgba(37, 23, 14, 0.42);
+  overflow: hidden;
+}
+
+.art > span {
+  padding: 10px;
+  color: rgba(37, 23, 14, 0.55);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+
+.art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chest {
+  width: min(330px, 78vw);
+  margin: 24px auto;
+}
+
+.chest .art {
+  aspect-ratio: 1 / 1;
+  background: transparent;
+  border: 0;
+}
+
+.chest .art img {
+  object-fit: contain;
+}
+
+.rewards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(440px, 100%);
+  margin-bottom: 28px;
+  border: 1px solid rgba(37, 23, 14, 0.4);
+}
+
+.reward {
+  display: grid;
+  gap: 5px;
+  padding: 14px 8px;
+}
+
+.reward + .reward {
+  border-left: 1px solid rgba(37, 23, 14, 0.4);
+}
+
+.reward b {
+  color: var(--blue);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  width: min(330px, 100%);
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 22px;
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  cursor: pointer;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.primary {
+  color: var(--cream);
+  background: var(--blue);
+  box-shadow: 6px 7px 0 #c78e2b;
+}
+
+.secondary {
+  margin-top: 14px;
+  color: var(--ink);
+  background: transparent;
+  box-shadow: 4px 5px 0 rgba(210, 161, 60, 0.7);
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.page button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.gameHead {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  text-align: left;
+}
+
+.gameHead .heading {
+  font-size: clamp(1.55rem, 6vw, 2.7rem);
+}
+
+.livesBox {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.livesBox small {
+  display: block;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.52rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.lives {
+  min-width: 76px;
+  color: var(--red);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+}
+
+.lost {
+  color: rgba(37, 23, 14, 0.25);
+}
+
+.seals {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  align-items: start;
+  gap: clamp(7px, 3vw, 20px);
+  margin: 12px 0 4px;
+}
+
+.sealWrap {
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+}
+
+.sealLabel,
+.selectedLabel {
+  color: var(--red);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: clamp(0.52rem, 2vw, 0.66rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sealLabel {
+  position: relative;
+  z-index: 12;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.selectedLabel {
+  min-height: 1em;
+  margin-top: 9px;
+  color: var(--blue);
+  font-size: clamp(0.58rem, 2vw, 0.72rem);
+}
+
+.seal {
+  position: relative;
+  width: clamp(82px, 24vw, 138px);
+  aspect-ratio: 1;
+  padding: 0;
+  background: radial-gradient(
+    circle,
+    var(--paper) 0 30%,
+    #c29a51 31% 34%,
+    var(--blue) 35% 61%,
+    var(--red) 62% 69%,
+    var(--ink) 70% 72%,
+    var(--paper) 73%
+  );
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  box-shadow:
+    0 7px 0 rgba(18, 63, 120, 0.25),
+    inset 0 0 0 3px rgba(248, 235, 189, 0.35);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    transform 160ms ease,
+    filter 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.gold {
+  filter: saturate(1.3) drop-shadow(0 0 10px rgba(210, 161, 60, 0.8));
+}
+
+.seal:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.pointer {
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  z-index: 10;
+  color: var(--red);
+  font-size: 0.72rem;
+  line-height: 1;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.disc {
+  --rotation: 0deg;
+  --counter-rotation: 0deg;
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  transform: rotate(var(--rotation));
+  transform-origin: center;
+  transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.disc .symbol {
+  transform: rotate(var(--counter-rotation));
+  transform-origin: center;
+  transition: transform 560ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24%;
+  aspect-ratio: 1;
+}
+
+.mark:nth-child(1) {
+  transform: translate(-50%, -50%) translateY(-145%);
+}
+
+.mark:nth-child(2) {
+  transform: translate(-50%, -50%) translateX(145%);
+}
+
+.mark:nth-child(3) {
+  transform: translate(-50%, -50%) translateY(145%);
+}
+
+.mark:nth-child(4) {
+  transform: translate(-50%, -50%) translateX(-145%);
+}
+
+.symbol {
+  position: relative;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+  color: var(--cream);
+  background: var(--blue);
+  border: 1px solid rgba(248, 235, 189, 0.74);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.symbol > span {
+  max-width: 94%;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: clamp(0.31rem, 1.15vw, 0.52rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.symbol img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sealCentre {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.sealCentre .symbol {
+  animation: symbolArrive 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes symbolArrive {
+  from {
+    opacity: 0.25;
+    transform: scale(0.72);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  margin: 28px 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(37, 23, 14, 0.55),
+    transparent
+  );
+}
+
+.cluePanel {
+  width: 100%;
+  padding: clamp(17px, 4vw, 26px);
+  background: rgba(248, 235, 189, 0.32);
+  border: 1px solid rgba(37, 23, 14, 0.36);
+}
+
+.clueTitle {
+  margin: 0;
+  color: var(--red);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+}
+
+.clueSubtitle {
+  margin: 8px 0 17px;
+  font-size: 0.92rem;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.clues {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr)
+    auto
+    minmax(0, 1fr);
+  align-items: center;
+  gap: 5px;
+}
+
+.clueGroup {
+  display: contents;
+}
+
+.clue .art {
+  aspect-ratio: 1 / 1;
+}
+
+.clue .art img {
+  object-fit: cover;
+}
+
+.arrow {
+  color: var(--red);
+  font-family: "Cinzel", Georgia, serif;
+}
+
+.poem {
+  display: grid;
+  gap: 2px;
+  margin: 17px 0 0;
+  font-size: clamp(0.88rem, 2.6vw, 1rem);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.status {
+  display: grid;
+  min-height: 62px;
+  place-content: center;
+  gap: 4px;
+  margin: 18px 0;
+  color: var(--blue);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+.danger {
+  color: var(--red);
+}
+
+.codeLabel {
+  color: var(--red);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.code {
+  width: min(440px, 100%);
+  margin-top: 10px;
+  padding: 18px 10px;
+  color: var(--cream);
+  background: var(--blue);
+  border: 2px solid var(--ink);
+  box-shadow: 6px 7px 0 #c78e2b;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: clamp(1.2rem, 6vw, 1.9rem);
+  letter-spacing: 0.08em;
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.code.copied {
+  animation: codeCopiedPulse 520ms ease;
+  box-shadow:
+    6px 7px 0 #c78e2b,
+    0 0 0 5px rgba(210, 161, 60, 0.24);
+}
+
+.backLink {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  padding: 0;
+  color: var(--red);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  cursor: pointer;
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.backLink:hover {
+  color: var(--blue);
+  transform: translateX(-3px);
+}
+
+.secondary:active {
+  transform: translateY(3px);
+}
+
+.secondary.copied {
+  color: var(--cream);
+  background: var(--red);
+  box-shadow: 3px 4px 0 #c78e2b;
+  transform: translateY(2px);
+}
+
+.copyStatus {
+  min-height: 20px;
+  margin-top: 12px;
+  color: var(--red);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@keyframes codeCopiedPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.035);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding: 8px;
+  }
+
+  .frame {
+    min-height: calc(100vh - 16px);
+    min-height: calc(100dvh - 16px);
+    padding: 29px 16px 36px;
+    box-shadow:
+      inset 0 0 0 5px rgba(210, 161, 60, 0.1),
+      4px 5px 0 rgba(37, 23, 14, 0.1);
+  }
+
+  .gameHead {
+    align-items: center;
+  }
+
+  .instruction {
+    margin: 15px 0 20px;
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .divider {
+    margin: 25px 0;
+  }
+}
